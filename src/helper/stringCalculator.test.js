@@ -29,15 +29,22 @@ describe("stringCalculator", () => {
 		expect(add("1,2\n3")).toBe(6);
 	});
 
-	it("handles custom delimiter", () => {
+	it("should handle custom delimiter", () => {
 		expect(add("//;\n1;2")).toBe(3);
 	});
 
-	it("handles custom delimiter with multiple numbers", () => {
+	it("should handle custom delimiter with multiple numbers", () => {
 		expect(add("//<\n1<2<3")).toBe(6);
 	});
 
-	it("handles custom delimiter with new lines", () => {
+	it("should handle custom delimiter with new lines", () => {
 		expect(add("//;\n1;2\n3")).toBe(6);
 	});
+    it('should throw an error for negative numbers', () => {
+        expect(() => add("1,-2,3")).toThrow("Negative numbers not allowed: -2");
+    });
+
+    it('should throw an error for multiple negative numbers', () => {
+        expect(() => add("1,-2,-3")).toThrow("Negative numbers not allowed: -2, -3");
+    });
 });
